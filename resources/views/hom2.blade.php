@@ -55,6 +55,7 @@
                                                         <a wire:click="compartirProyecto('{{ $proyecto->codigo }}')"
                                                             class="myButtonShare">Compartir</a>
                                                     @endif
+                                                    
                                                     <a href="http://localhost:8080/model-c4?room={{ $proyecto->codigo }}&username={{ auth()->user()->token }}"
                                                         class="myButton">Ingresar</a>
                                                 </div>
