@@ -89,6 +89,8 @@
                                                                 @endif
                                                                 <a href="http://localhost:8080/model-c4?room={{ $proyecto->codigo }}&username={{ auth()->user()->token }}"
                                                                     class="myButton">Ingresar</a>
+                                                                    <a wire:click="descargarProyecto('{{ $proyecto->codigo }}')"
+                                                                        class="myButtonShare">Descargar</a>
                                                             </div>
                                                         </div>
                                                     </div>

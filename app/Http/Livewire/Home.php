@@ -20,6 +20,7 @@ class Home extends Component
     public $modalDestroy=false;
     public $modalUnirse=false;
     public $modalCompartir=false;
+    public $modalDescargar = false;
     public $modalUsers=false;
     public $registrado=false;
     public $opcion=true;
@@ -88,8 +89,49 @@ class Home extends Component
         $this->modalCompartir=true;
         $this->codigo=$codigo;
     }
+    ////////ANTIGUA FUNCION DE DESCARGAR
+  /*   public function descargarProyecto($codigo)
+    {
+
+        $this->modalDescargar = true;
+        $this->codigo=$codigo;
+        //dd($codigo);
+        $xml = simplexml_load_string($codigo);
+        //dd($xml);
+        $json = json_encode($xml);
+        $array = json_decode($json);
+        $contenido = $array->root->mxCell;
+        dd($contenido);
+        //$sql = '';
+    } */
+    public function descargarProyecto($codigo)
+{
+    $this->modalDescargar = true;
+    $this->codigo = $codigo;
+
+    // Decodifica entidades HTML antes de cargar el XML
+    $codigoDecodificado = html_entity_decode($codigo);
     
+    try {
+        // Intenta cargar el XML
+        $xml = simplexml_load_string($codigoDecodificado);
+
+        // Continua con el procesamiento del XML
+        $json = json_encode($xml);
+        dd($xml);
+        $array = json_decode($json);
+        $contenido = $array->root->mxCell;
+
+        dd($contenido);
+        //$sql = '';
+    } catch (\Exception $e) {
+        // Manejar excepciones
+        return response()->json(['error' => 'Error al cargar el XML: ' . $e->getMessage()], 500);
+    }
+}
+
     
+     
     public function storeProyecto()
     {
         if ($this->nombre!=""){
@@ -115,6 +157,7 @@ class Home extends Component
             $this->errormodal=true;
         }else{
             $proyecto=Proyecto::where("codigo",$this->codigo)->get()->first();
+            //dd($proyecto);
             $proyectouser=ProyectoUser::where("user_id",auth()->user()->id)
             ->where("proyecto_id",$proyecto->id)
             ->get()->first();

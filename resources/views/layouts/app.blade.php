@@ -27,7 +27,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img class="logo" src="{{asset('img/logo.png')}}" alt="">
-                    <div class="titulo">Diagramador C4</div>
+                    <div class="titulo">Diagramador de secuencia</div>
                     
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
